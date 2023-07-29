@@ -21,8 +21,6 @@ public:
 		delete[] this->ptr;
 	}
 	Array(const Array<T>& obj) {
-		delete[] this->ptr;
-		this->ptr = nullptr;
 		this->size = obj.size;
 		this->ptr = new T[this->size];
 		for (int i = 0; i < this->size; i++) {
@@ -31,8 +29,6 @@ public:
 	}
 	Array(Array<T>&& obj) {
 		std::cout << "Array move con-tor" << std::endl;
-		delete[] this->ptr;
-		this->ptr = nullptr;
 		this->size = obj.size;
 		this->ptr = obj.ptr;
 		obj.ptr = nullptr;
