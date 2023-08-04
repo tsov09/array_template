@@ -107,6 +107,9 @@ public:
 		delete[] temp_ptr;
 		temp_ptr = nullptr;
 	}
+	int length() {
+		return this->size;
+	}
 	void print() {
 		std::cout << "{ ";
 		for (int i = 0; i < this->size - 1; i++) {
@@ -117,8 +120,21 @@ public:
 	}
 };
 
-int main() {
-	srand(time(NULL));
+template <typename T>
+class Stack : private Array<T> {
+public:
+	void push(T item) {
+		this->push_back(item);
+	}
+	void pop() {
+		this->pop_back();
+	}
+	T top() {
+		return this->gen_element(this->length() - 1);
+	}
+};
+
+void check_array() {
 	std::cout << std::endl;
 
 	Array<int> arr_i;
@@ -137,5 +153,22 @@ int main() {
 
 	//Array<double> arr_d;
 	//arr_d.print();
+}
+int main() {
+	srand(time(NULL));
+
+	Stack<int>* stack = new Stack<int>();
+	std::cout << "Stack:" << std::endl;
+	stack->push(56);
+	std::cout << "Top after push(...) 56: " << stack->top() << std::endl;
+	stack->push(75);
+	std::cout << "Top after push(...) 75: " << stack->top() << std::endl;
+	stack->push(23);
+	std::cout << "Top after push(...) 23: " << stack->top() << std::endl;
+	stack->pop();
+	std::cout << "Top after single pop(): " << stack->top() << std::endl;
+
+
+	delete stack;
 	return 0;
 }
